@@ -8,8 +8,9 @@ class Database {
   public $connection;
   public $statement;
 
-  public function __construct($config, $username = 'root', $password = '') {
-    $dsn = 'mysql:' . http_build_query($config, '', ';');
+  public function __construct($config, $username = 'root') {
+    $dsn = "mysql:" . http_build_query($config, '', ';');
+    $password = $config['password'] ?? null;
 
     $this->connection = new PDO($dsn, $username, $password, [
       PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
@@ -34,7 +35,7 @@ class Database {
   public function findOrFail() {
     $result = $this->find();
 
-    if (! $result) {
+    if (!$result) {
       abort();
     }
 
