@@ -3,6 +3,8 @@
 namespace Core;
 
 class App {
+  // NOTE: example of SINGLETON **
+
   protected static $container;
 
   public static function setContainer($arg) {
